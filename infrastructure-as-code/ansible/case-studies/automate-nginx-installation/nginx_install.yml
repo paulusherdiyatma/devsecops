@@ -1,21 +1,21 @@
 - name: Install and configure Nginx
-    hosts: all
-    become: yes
-    vars:
-      nginx_config_file: "/etc/nginx/sites-available/default"
+  hosts: all
+  become: yes
+  vars:
+    nginx_config_file: "/etc/nginx/sites-available/default"
 
-    tasks:
-      - name: Install Nginx
-        apt:
-          name: nginx
-          state: present
-        notify:
-          - restart nginx
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      notify:
+        - restart nginx
 
-      - name: Copy custom Nginx configuration
-        template:
-          src: "nginx_{{ ansible_hostname }}.conf.j2"
-          dest: "{{ nginx_config_file }}"
+    - name: Copy custom Nginx configuration
+      template:
+        src: "nginx_{{ ansible_hostname }}.conf.j2"
+        dest: "{{ nginx_config_file }}"
 
 handlers:
   - name: restart nginx
