@@ -17,8 +17,8 @@
         src: "nginx_{{ ansible_hostname }}.conf.j2"
         dest: "{{ nginx_config_file }}"
 
-handlers:
-  - name: restart nginx
-    service:
-      name: nginx
-      state: restarted
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
